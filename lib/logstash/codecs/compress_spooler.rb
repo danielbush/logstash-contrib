@@ -22,14 +22,16 @@ class LogStash::Codecs::CompressSpooler < LogStash::Codecs::Base
     z.close
     data.each do |event|
       event = LogStash::Event.new(event)
-      event["@timestamp"] = Time.at(event["@timestamp"]).utc if event["@timestamp"].is_a? Float
+      event["@timestamp"] = Time.at(event["@timestamp_f"]).utc if event["@timestamp_f"].is_a? Float
+      event.remove("@timestamp_f")
       yield event
     end
   end # def decode
 
   public
   def encode(data)
-    data["@timestamp"] = data["@timestamp"].to_f
+    data["@timestamp_f"] = data["@timestamp"].to_f
+    data.remove("@timestamp")
     @buffer << data.to_hash
 
     if @buffer.length >= @spool_size
