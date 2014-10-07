@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency "rack"               #(MIT license)
   gem.add_runtime_dependency "sinatra"            #(MIT license)
+  gem.add_runtime_dependency "i18n", ["=0.6.9"]                 #(MIT license)
   gem.add_runtime_dependency "google-api-client"                #{Apache 2.0 license}
   gem.add_runtime_dependency "heroku"                           #(MIT license)
   gem.add_runtime_dependency "elasticsearch"                    #(Apache 2.0 license)
